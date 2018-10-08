@@ -1,0 +1,97 @@
+cabal-version:       2.0
+name:                sample-site
+version:             0.0.0
+synopsis:            Sample web server.
+description:         Sample web server that can be used as an example
+                     of the web server.
+                     The main purpose of this project is to present
+                     different features available for building web
+                     applications in the Haskell ecosystem.
+homepage:            https://github.com/qnikst/sample-site
+bug-reports:         https://github.com/qnikst/sample-site/issues
+license:             MIT
+license-file:        LICENSE
+author:              Alexander Vershilov
+maintainer:          alexander.vershilov@gmail.com
+copyright:           2018 (C) Alexander Vershilov
+category:            Web
+build-type:          Simple
+extra-doc-files:     README.md
+                   , CHANGELOG.md
+
+source-repository head
+  type:                git
+  location:            https://github.com/qnikst/sample-site.git
+
+library
+  hs-source-dirs:      src
+  exposed-modules:     Data.Aeson.Extended
+                       Sample.Server
+                       Sample.Api
+                       Servant.API.Extended
+  ghc-options:         -Wall
+                       -Wincomplete-uni-patterns
+                       -Wincomplete-record-updates
+                       -Wcompat
+                       -Widentities
+                       -Wredundant-constraints
+                       -fhide-source-paths
+  build-depends:       base >= 4.10 && <4.13
+                     , aeson
+                     , aeson-pretty
+                     , bytestring
+                     , lens
+                     , servant
+                     , servant-server
+                     , servant-swagger
+                     , servant-swagger-ui
+                     , swagger2 >= 2.3
+                     , text
+                     , QuickCheck
+                     , warp
+  default-language:    Haskell2010
+  
+
+executable sample-site
+  hs-source-dirs:      app
+  main-is:             Main.hs
+  ghc-options:         -Wall
+                       -threaded
+                       -rtsopts
+                       -Wincomplete-uni-patterns
+                       -Wincomplete-record-updates
+                       -Wcompat
+                       -Widentities
+                       -Wredundant-constraints
+                       -fhide-source-paths
+  build-depends:       base 
+                     , sample-site
+  default-language:    Haskell2010
+  
+
+test-suite spec
+  type:                exitcode-stdio-1.0
+  hs-source-dirs:      test/spec
+  main-is:             Main.hs
+  other-modules:       Sample.ApiSpec
+                       Paths_sample_site
+  ghc-options:         -Wall
+                       -threaded
+                       -rtsopts
+                       -Wincomplete-uni-patterns
+                       -Wincomplete-record-updates
+                       -Wcompat
+                       -Widentities
+                       -Wredundant-constraints
+                       -fhide-source-paths
+  build-depends:       base 
+                     , sample-site
+                     , hspec
+                     , HUnit
+                     , aeson
+                     , aeson-diff
+                     , aeson-pretty
+                     , bytestring
+                     , servant-swagger
+                     , text
+  default-language:    Haskell2010

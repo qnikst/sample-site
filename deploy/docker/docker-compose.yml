@@ -1,0 +1,42 @@
+version: "3"
+services:
+
+  site:
+    image: "sample-site:latest"
+    ports:
+    - '8080:8080'
+
+  node_exporter:
+    image: prom/node-exporter
+    expose:
+      - 9100
+  
+  prometheus:
+    image: prom/prometheus:latest
+    volumes:
+    - ./config/prometheus:/etc/prometheus
+    - prometheus_data:/prometheus
+    command:
+    - '--config.file=/etc/prometheus/prometheus.yml'
+    ports:
+    - '9090:9090'
+    links:
+    - site
+
+  grafana:
+    image: grafana/grafana
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=pass
+    depends_on:
+      - prometheus
+    ports:
+      - "3000:3000"
+    links:
+      - prometheus
+    volumes:
+      - grafana_data:/var/lib/grafana
+    user: "104"    
+
+volumes:
+  prometheus_data: {}
+  grafana_data: {}
