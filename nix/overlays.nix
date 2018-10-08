@@ -7,6 +7,8 @@
         overrides = new: old: rec
          { swagger2 =
               old.callHackage "swagger2" "2.3" {};
+           prometheus-client =
+              old.callHackage "prometheus-client" "1.0.0" {};
          };
       };
 

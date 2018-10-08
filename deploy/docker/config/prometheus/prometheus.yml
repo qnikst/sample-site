@@ -7,3 +7,4 @@ scrape_configs:
     static_configs:
       - targets: 
         - site:8080
+        - node_exporter:9010

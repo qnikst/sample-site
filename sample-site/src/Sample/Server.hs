@@ -8,6 +8,7 @@ module Sample.Server
   ) where
 
 import qualified Network.Wai.Handler.Warp as Warp
+import Network.Wai.Middleware.Prometheus
 import Sample.Api
 import Servant
 import Servant.API.Extended
@@ -20,6 +21,9 @@ type API
 run :: IO ()
 run = do
   Warp.run configPort
+    $ prometheus def {
+        prometheusInstrumentPrometheus = False
+        }
     $ serve (Proxy @API)
     $ swaggerSchemaUIServer swagger 
         :<|> server
