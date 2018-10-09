@@ -27,9 +27,9 @@ install:
   - export PATH="/opt/ghc/$GHCVER/bin:/opt/cabal/$CABALVER/bin:$PATH"
   - echo $PATH
   - cabal new-update
-  - cabal new-build --enable-tests --enable-benchmarks
+  - cabal new-build --enable-tests --enable-benchmarks sample-site
 script:
-  - cabal new-test
+  - cabal new-test sample-site
 
 
 notifications:
