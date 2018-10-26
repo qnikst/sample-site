@@ -8,5 +8,5 @@ in pkgs.haskellPackages.shellFor {
    LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath
      [ pkgs.xz.out
      ];
-   buildInputs = [pkgs.cabal-install pkgs.xz ];
+   buildInputs = [pkgs.cabal-install pkgs.xz pkgs.haskell.compiler.ghc861 ];
 }
